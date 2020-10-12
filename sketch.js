@@ -1,10 +1,14 @@
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
+var box1,box2,box3,box4,box5;
+var pig1,pig3;
+var log1,log3,log4,log5;
 var engine, world;
-var box1, pig1;
 var backgroundImg,platform;
+var conLog, chain1;
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -15,27 +19,30 @@ function setup(){
     engine = Engine.create();
     world = engine.world;
 
-
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
 
+    conLog = new Log(250,180,80,PI/2);
+
     box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810,260,300, PI/2);
-
     box3 = new Box(700,240,70,70);
     box4 = new Box(920,240,70,70);
+    box5 = new Box(810,160,70,70);
+
+    pig1 = new Pig(810, 350);
     pig3 = new Pig(810, 220);
 
+    log1 = new Log(810,260,300, PI/2);
     log3 =  new Log(810,180,300, PI/2);
-
-    box5 = new Box(810,160,70,70);
     log4 = new Log(760,120,150, PI/7);
     log5 = new Log(870,120,150, -PI/7);
 
     bird = new Bird(100,100);
 
+    chain1 = new Chain(bird.body,conLog.body);
+    //JASON: JavaScript Object Notation, a data structure, multiple names and multiple values
+    //Each value is indexed. Exchange data between the browser and server; always uses :
 }
 
 function draw(){
@@ -61,4 +68,6 @@ function draw(){
 
     bird.display();
     platform.display();
+    conLog.display();
+    chain1.display();
 }
